@@ -65,7 +65,8 @@ async def run_analysis_task(model_client, code_executor, task):
     """Handles the full lifecycle of running the AutoGen team."""
     try:
         # await start_docker_executor(docker_executor)
-        team = get_data_analyzer_team(model_client, docker_executor)
+        # team = get_data_analyzer_team(model_client, docker_executor)
+        team = get_data_analyzer_team(model_client, code_executor)
 
         if st.session_state.team_state:
             await team.load_state(st.session_state.team_state)
