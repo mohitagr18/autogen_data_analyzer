@@ -12,3 +12,8 @@ langchain
 # docker
 # autogen-ext[docker]
 streamlit
+pandas
+matplotlib
+numpy
+scikit-learn
+seaborn
