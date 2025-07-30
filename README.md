@@ -1,4 +1,4 @@
-# AutoGen Data Analyst 🤖
+# AutoGen Data Analyzer 🤖
 
 A multi-agent AI application built with AutoGen and Streamlit that performs real-time data analysis based on natural language commands.
 
@@ -31,7 +31,7 @@ The application uses a multi-agent architecture orchestrated by **Microsoft Auto
 
 * **Python**
 * **Frameworks:** Streamlit, AutoGen
-* **AI:** OpenAI API (GPT-4/GPT-3.5)
+* **AI:** OpenAI API (GPT-4)
 * **Containerization:** Docker
 
 ## 📖 Usage
