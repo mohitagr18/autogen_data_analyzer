@@ -4,9 +4,11 @@ import os
 from pathlib import Path
 from teams.analyzer_team import get_data_analyzer_team
 from models.openai_model_client import get_model_client
-from config.docker_util import get_docker_executor, start_docker_executor, stop_docker_executor
+# from config.docker_util import get_docker_executor, start_docker_executor, stop_docker_executor
+from autogen_ext.code_executors.local import LocalCommandLineCodeExecutor
 from autogen_agentchat.messages import TextMessage
 from autogen_agentchat.base import TaskResult
+from autogen_agentchat.
 
 # Use Constants for paths and filenames
 TEMP_DIR = Path("temp")
@@ -57,10 +59,12 @@ async def display_streamed_messages(team_run_stream):
             st.markdown(f"Stop Reason: {message.stop_reason}")
             st.session_state.messages.append(message.stop_reason)
 
-async def run_analysis_task(model_client, docker_executor, task):
+# async def run_analysis_task(model_client, docker_executor, task):
+async def run_analysis_task(model_client, code_executor, task):
+
     """Handles the full lifecycle of running the AutoGen team."""
     try:
-        await start_docker_executor(docker_executor)
+        # await start_docker_executor(docker_executor)
         team = get_data_analyzer_team(model_client, docker_executor)
 
         if st.session_state.team_state:
@@ -73,7 +77,8 @@ async def run_analysis_task(model_client, docker_executor, task):
     except Exception as e:
         st.error(f"An error occurred: {e}")
     finally:
-        await stop_docker_executor(docker_executor)
+        pass
+        # await stop_docker_executor(docker_executor)
 
 def display_task_results(existing_pngs):
     """Displays the final artifacts (report or images) after a task."""
@@ -108,10 +113,12 @@ for msg in st.session_state.messages:
 if task and uploaded_file:
     existing_pngs = prepare_task_environment(uploaded_file)
     
-    docker_executor = get_docker_executor()
+    # docker_executor = get_docker_executor()
+    code_executor = LocalCommandLineCodeExecutor(work_dir=TEMP_DIR)
     model_client = get_model_client()
     
-    asyncio.run(run_analysis_task(model_client, docker_executor, task))
+    # asyncio.run(run_analysis_task(model_client, docker_executor, task))
+    asyncio.run(run_analysis_task(model_client, code_executor, task))
     
     display_task_results(existing_pngs)
 elif task:
