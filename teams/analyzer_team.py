@@ -14,7 +14,7 @@ def get_data_analyzer_team(model_client, code_executor):
     team = RoundRobinGroupChat(
         participants=[code_executor_agent, data_analyzer_agent],
         termination_condition=text_mention_termination,
-        max_turns=20
+        max_turns=100
     )
     
     return team
