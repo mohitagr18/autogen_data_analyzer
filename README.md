@@ -23,9 +23,10 @@ The application uses a multi-agent architecture orchestrated by **Microsoft Auto
 * **Frontend:** A user-friendly interface built with **Streamlit**.
 * **Backend:** A team of collaborative AI agents powered by the **OpenAI API**.
 * **The Agents:**
-    * **`UserProxyAgent`**: Represents the human user in the chat, relaying requests to the agent team.
     * **`Data_Analyzer`**: The "planner" agent. It interprets the user's request, decides on an analysis strategy, and writes the Python code.
-    * **`Python_Code_Executor`**: The "executor" agent. It runs the generated code within a secure **Docker** container and reports back the results or errors.
+    * **`Python_Code_Executor`**: The "executor" agent. It runs the generated code within a secure Docker container, reports back the results or errors, and automatically installs any missing libraries requested by the planner.
+
+Note on Deployment: The full containerized experience with automatic package installation is available when running the application locally with Docker. The version deployed on Streamlit Community Cloud does not support Docker; instead, it executes code within the platform's standard container.
 
 ## 💻 Tech Stack
 
